@@ -2,13 +2,15 @@ package com.wmlab.navigation;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 
 public class Main extends Activity{
-	
+	private MyMapNavigation myMapNavigation;
 	private Timer sensorTimer = null;
 	private TimerTask sensorTimerTask = null;
 	
@@ -18,12 +20,12 @@ public class Main extends Activity{
 	private short turnToWhat = 0;
 	public static final short TurnLeft = 1;
 	public static final short TurnRight = 2;
-		
+	public CoordsHolder destination;	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
+		this.myMapNavigation = new MyMapNavigation(this);
+		setContentView(myMapNavigation);
 		//initialize sensors and wifi scan
 		sensorData.initSensors();
 		wifiSignal.initWifiManager();
@@ -100,5 +102,11 @@ public class Main extends Activity{
 		int pointID;
 		float x;
 		float y;
+		public void setX(float inputX) {
+			this.x = inputX;
+		}
+		public void setY(float inputY) {
+			this.y = inputY;
+		}
 	}
 }
